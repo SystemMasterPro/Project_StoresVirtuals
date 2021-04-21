@@ -170,6 +170,34 @@ class Delete_Category_View(DetailView):
         object.save()
         return redirect('view_list_categories')
 
+# SUPPLIERS
+class List_suppliers_view(ListView):
+    model = Supplier
+    template_name = 'list_suppliers.html'
+    queryset = Supplier.objects.filter(state=True)
+    context_object_name = 'suppliers'
+
+class New_Supplier_View(CreateView):
+    model = Supplier
+    form_class = SupplierForm
+    template_name = 'new_supplier.html'
+    success_url = reverse_lazy('view_list_suppliers')
+
+class Update_Supplier_View(UpdateView):
+    model = Supplier
+    form_class = SupplierForm
+    template_name = 'update_supplier.html'
+    success_url = reverse_lazy('view_list_suppliers')
+    
+class Delete_Supplier_View(DetailView):
+    model = Supplier
+    template_name = 'delete_supplier.html'
+    def post(self,request,pk,*args,**kwargs):
+        object = Supplier.objects.get(id=pk)
+        object.state = False
+        object.save()
+        return redirect('view_list_suppliers')
+
 # CLASS REST framework
 
 class StoreViewSet(viewsets.ModelViewSet):

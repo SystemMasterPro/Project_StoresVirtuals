@@ -38,6 +38,11 @@ urlpatterns = [
     path('home/list_categories/edit_categories/<int:pk>/', login_required(Update_Category_View.as_view()), name='view_edit_categories'),
     path('home/list_categories/delete_categories/<int:pk>/', login_required(Delete_Category_View.as_view()), name='view_delete_categories'),
     path('new_category/',login_required(New_Category_View.as_view()),name='view_new_category'),
+    # SUPPLIERS URL
+    path('home/list_suppliers/', login_required(List_suppliers_view.as_view()), name='view_list_suppliers'),
+    path('home/list_suppliers/edit_suppliers/<int:pk>/', login_required(Update_Supplier_View.as_view()), name='view_edit_suppliers'),
+    path('home/list_suppliers/delete_suppliers/<int:pk>/', login_required(Delete_Supplier_View.as_view()), name='view_delete_suppliers'),
+    path('new_supplier/',login_required(New_Supplier_View.as_view()),name='view_new_supplier'),
     # API-REST
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

@@ -73,4 +73,14 @@ class CategoryForm(forms.ModelForm):
             'name': 'Nombre de la Categoria:',
             'description':'Descripcion:',
             'store': 'Tienda:'
+        }
+
+class SupplierForm(forms.ModelForm):
+    class Meta:
+        model = Supplier
+        fields = ['name','phone','store']
+        labels = {
+            'name': 'Nombre del Proveedor:',
+            'phone':'Telefono del Proveedor:',
+            'store': 'Tienda:'
         }    
