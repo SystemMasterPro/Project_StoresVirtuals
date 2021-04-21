@@ -8,6 +8,7 @@ class Store(models.Model):
     name = models.CharField(max_length=50)
     direction = models.CharField(max_length=100, null=True)
     phone = models.IntegerField()
+    state = models.BooleanField('State', default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)
 
@@ -24,6 +25,7 @@ class Category(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=50)
     description = models.TextField(blank=False, null=False)
+    state = models.BooleanField('State', default=True)
     store = models.ForeignKey(Store,on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now_add=True)

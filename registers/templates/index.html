@@ -55,7 +55,7 @@
       <div id="sidebar" class="nav-collapse ">
         <!-- sidebar menu start-->
         <ul class="sidebar-menu" id="nav-accordion">
-          <p class="centered"><a><img src="{% static 'img/ui-sam.jpg' %}" class="img-circle" width="80"></a></p>
+          <p class="centered"><a><img src="{% static 'img/Profile.jpg' %}" class="img-circle" width="80"></a></p>
           <h5 class="centered">{{ user.username | upper }}</h5>
           <li class="mt">
             <a class="active" href="/">
@@ -94,7 +94,7 @@
             </a>
           </li>
           <li class="sub-menu">
-            <a href="#">
+            <a href="{% url 'view_list_products' %}">
               <i class="fa fa-th"></i>
               <span>Productos</span>
             </a>
@@ -123,7 +123,7 @@
     <section id="main-content">
       <section class="wrapper">
         <div class="row">
-          <div class="col-lg-9 main-chart">
+          <div class="col-lg-9 main-chart" style="height:1000px;">
             {% block body %}
             <!-- CONTENIDO CAMBIANTE -->
             <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">

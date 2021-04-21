@@ -11,7 +11,7 @@
     <div class="card-header text-center" style="margin-top:4px !important;margin-bottom:4px !important;">
         <strong class="card-title" style="font-size:40px;">TIENDAS REGISTRADAS</strong>
     </div>
-    <div class="table-stats order-table ov-h">
+    <div class="table order-table ov-h">
         <table class="table">
             <thead>
                 <tr>
@@ -32,7 +32,7 @@
                     <td>{{store.phone}}</td>
                     <td class="text-center">
                         <button class="btn btn-warning" onclick="open_modal_edition('{% url 'view_edit_stores' store.id %}')">Editar</button>
-                        <button class="btn btn-danger" onclick="open_modal_delete('{% url 'view_delete_stores' store.id %}')">Eliminar</button>
+                        <a class="btn btn-danger" href="{% url 'view_delete_stores' store.id %}">Eliminar</a>
                     </td>
                 </tr>
                 
@@ -52,8 +52,6 @@
 </div>
 <div class="modal face" id="edition" role="dialog">
 </div>
-<div class="modal face" id="delete" role="dialog">
-</div>
 
 <script type="text/javascript">
     var $ = jQuery.noConflic();
@@ -64,11 +62,6 @@
     }
     function open_modal_edition(url) {
         $('#edition').load(url, function () {
-            $(this).modal('show')
-        })
-    }
-    function open_modal_delete(url){
-        $('#delete').load(url,function () {
             $(this).modal('show')
         })
     }

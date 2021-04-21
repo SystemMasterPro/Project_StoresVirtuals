@@ -11,7 +11,7 @@ class CategoryResource(resources.ModelResource):
         model = Category
 
 class CategoryAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'description', 'store')
+    list_display = ('name', 'description', 'store', 'state')
     readonly_fields = ('created', 'updated')
     search_fields = ['name']
     resource_class = CategoryResource
@@ -21,7 +21,7 @@ class StoreResource(resources.ModelResource):
         model = Store
 
 class StoreAdmin(ImportExportModelAdmin):
-    list_display = ('name', 'direction', 'phone')
+    list_display = ('name', 'direction', 'phone', 'state')
     readonly_fields = ('created', 'updated')
     search_fields = ['name']
     resource_class = StoreResource

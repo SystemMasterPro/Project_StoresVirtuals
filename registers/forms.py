@@ -54,7 +54,13 @@ class StoreForm(forms.ModelForm):
             )
         }
     
-
-
-
-    
+class ProductForm(forms.ModelForm):
+    class Meta:
+        model = Product
+        fields = ['product','price','state','image','category']
+        labels = {
+            'product': 'Nombre del Producto:',
+            'price':'Precio del Producto:',
+            'image': 'Imagen:',
+            'category':'Categoria:'
+        }    

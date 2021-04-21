@@ -81,7 +81,7 @@ def register_view(request):
 class List_stores_view(ListView):
     model = Store
     template_name = 'list_stores.html'
-    queryset = Store.objects.all()
+    queryset = Store.objects.filter(state=True)
     context_object_name = 'stores'
 
 class New_Store_View(CreateView):
@@ -96,15 +96,56 @@ class Update_Store_View(UpdateView):
     template_name = 'update_store.html'
     success_url = reverse_lazy('view_list_stores')
     
-class Delete_Store_View(DeleteView):
+class Delete_Store_View(DetailView):
     model = Store
     template_name = 'delete_store.html'
     def post(self,request,pk,*args,**kwargs):
         object = Store.objects.get(id=pk)
-        object.delete()
-        print('paso')
-    print('paso2')
-    success_url = reverse_lazy('view_list_stores')
+        object.state = False
+        object.save()
+        return redirect('view_list_stores')
+
+# PRODUCTS
+
+class List_products_view(ListView):
+    model = Product
+    template_name = 'list_products.html'
+    queryset = Product.objects.filter(state=True)
+    context_object_name = 'products'
+
+# class New_Product_View(CreateView):
+#     model = Product
+#     form_class = ProductForm
+#     template_name = 'new_product.html'
+#     success_url = reverse_lazy('view_list_products')
+
+@login_required(login_url='')
+def New_Product_View(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST,request.FILES)
+        ctx = {'form': form}
+        if form.is_valid():
+            form.save()
+            return redirect('/home/list_products/')
+    else:
+        form = ProductForm()
+        ctx = {'form': form}
+    return render(request,'new_product.html',ctx)
+
+class Update_Product_View(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'update_product.html'
+    success_url = reverse_lazy('view_list_products')
+    
+class Delete_Product_View(DetailView):
+    model = Product
+    template_name = 'delete_product.html'
+    def post(self,request,pk,*args,**kwargs):
+        object = Product.objects.get(id=pk)
+        object.state = False
+        object.save()
+        return redirect('view_list_products')
 
 
 # CLASS REST framework
