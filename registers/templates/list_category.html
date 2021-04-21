@@ -3,14 +3,14 @@
 
 <div>
     <button class="btn btn-success" style="margin-bottom:4px !important;"
-        onclick="open_modal('{% url 'view_new_product' %}')">Nuevo Producto</button>
+        onclick="open_modal('{% url 'view_new_category' %}')">Nueva Categoria</button>
 </div>
 
-{% if products %}
+{% if categories %}
 
 <div class="card">
     <div class="card-header text-center" style="margin-top:4px !important;margin-bottom:4px !important;">
-        <strong class="card-title" style="font-size:40px;">PRODUCTOS REGISTRADOS</strong>
+        <strong class="card-title" style="font-size:40px;">CATEGORIAS REGISTRADAS</strong>
     </div>
     <div class="table order-table ov-h">
         <table class="table">
@@ -18,27 +18,23 @@
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Precio</th>
-                    <th>Imagen</th>
-                    <th>Categoria</th>
+                    <th>Descripcion</th>
+                    <th>Tienda</th>
                     <th class="text-center">Opciones</th>
                 </tr>
             </thead>
             <tbody>
-                {% for product in products %}
+                {% for category in categories %}
 
                 <tr>
-                    <td>{{product.id}}</td>
-                    <td>{{product.product}}</td>
-                    <td>{{product.price}}</td>
-                    <td>
-                        {{product.image_product}}
-                    </td>
-                    <td>{{product.category}}</td>
+                    <td>{{category.id}}</td>
+                    <td>{{category.name}}</td>
+                    <td>{{category.description}}</td>
+                    <td>{{category.store}}</td>
                     <td class="text-center">
                         <button class="btn btn-warning"
-                            onclick="open_modal_edition('{% url 'view_edit_products' product.id %}')">Editar</button>
-                        <a class="btn btn-danger" href="{% url 'view_delete_products' product.id %}">Eliminar</a>
+                            onclick="open_modal_edition('{% url 'view_edit_categories' category.id %}')">Editar</button>
+                        <a class="btn btn-danger" href="{% url 'view_delete_categories' category.id %}">Eliminar</a>
                     </td>
                 </tr>
 
@@ -50,24 +46,24 @@
 
 {% else %}
 
-<h1>No existen productos registrados</h1>
+<h1>No existen CATEGORIAS registradas</h1>
 
 {% endif %}
 
-<div class="modal face" id="new-p" role="dialog">
+<div class="modal face" id="new" role="dialog">
 </div>
-<div class="modal face" id="edition-p" role="dialog">
+<div class="modal face" id="edition" role="dialog">
 </div>
 
 <script type="text/javascript">
     var $ = jQuery.noConflic();
     function open_modal(url) {
-        $('#new-p').load(url, function () {
+        $('#new').load(url, function () {
             $(this).modal('show')
         })
     }
     function open_modal_edition(url) {
-        $('#edition-p').load(url, function () {
+        $('#edition').load(url, function () {
             $(this).modal('show')
         })
     }

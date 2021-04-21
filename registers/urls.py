@@ -32,10 +32,12 @@ urlpatterns = [
     path('home/list_products/', login_required(List_products_view.as_view()), name='view_list_products'),
     path('home/list_products/edit_products/<int:pk>/', login_required(Update_Product_View.as_view()), name='view_edit_products'),
     path('home/list_products/delete_products/<int:pk>/', login_required(Delete_Product_View.as_view()), name='view_delete_products'),
-    # path('new_product/',login_required(New_Product_View.as_view()),name='view_new_product'),
     path('new_product/',New_Product_View, name='view_new_product'),
-    # 
-    
+    # CATEGORIES URL
+    path('home/list_categories/', login_required(List_categories_view.as_view()), name='view_list_categories'),
+    path('home/list_categories/edit_categories/<int:pk>/', login_required(Update_Category_View.as_view()), name='view_edit_categories'),
+    path('home/list_categories/delete_categories/<int:pk>/', login_required(Delete_Category_View.as_view()), name='view_delete_categories'),
+    path('new_category/',login_required(New_Category_View.as_view()),name='view_new_category'),
     # API-REST
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

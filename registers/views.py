@@ -113,12 +113,6 @@ class List_products_view(ListView):
     queryset = Product.objects.filter(state=True)
     context_object_name = 'products'
 
-# class New_Product_View(CreateView):
-#     model = Product
-#     form_class = ProductForm
-#     template_name = 'new_product.html'
-#     success_url = reverse_lazy('view_list_products')
-
 @login_required(login_url='')
 def New_Product_View(request):
     if request.method == 'POST':
@@ -147,6 +141,34 @@ class Delete_Product_View(DetailView):
         object.save()
         return redirect('view_list_products')
 
+# CATEGORIES
+
+class List_categories_view(ListView):
+    model = Category
+    template_name = 'list_category.html'
+    queryset = Category.objects.filter(state=True)
+    context_object_name = 'categories'
+
+class New_Category_View(CreateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'new_category.html'
+    success_url = reverse_lazy('view_list_categories')
+
+class Update_Category_View(UpdateView):
+    model = Category
+    form_class = CategoryForm
+    template_name = 'update_category.html'
+    success_url = reverse_lazy('view_list_categories')
+    
+class Delete_Category_View(DetailView):
+    model = Category
+    template_name = 'delete_category.html'
+    def post(self,request,pk,*args,**kwargs):
+        object = Category.objects.get(id=pk)
+        object.state = False
+        object.save()
+        return redirect('view_list_categories')
 
 # CLASS REST framework
 
