@@ -198,6 +198,100 @@ class Delete_Supplier_View(DetailView):
         object.save()
         return redirect('view_list_suppliers')
 
+# CASHIERS
+
+class List_cashiers_view(ListView):
+    model = Cashier
+    template_name = 'list_cashiers.html'
+    queryset = Cashier.objects.filter(state=True)
+    context_object_name = 'cashiers'
+
+@login_required(login_url='')
+def New_Cashier_View(request):
+    if request.method == 'POST':
+        form = CashierForm(request.POST,request.FILES)
+        ctx = {'form': form}
+        if form.is_valid():
+            form.save()
+            return redirect('/home/list_cashiers/')
+    else:
+        form = CashierForm()
+        ctx = {'form': form}
+    return render(request,'new_cashier.html',ctx)
+
+class Update_Cashier_View(UpdateView):
+    model = Cashier
+    form_class = CashierForm
+    template_name = 'update_cashier.html'
+    success_url = reverse_lazy('view_list_cashiers')
+    
+class Delete_Cashier_View(DetailView):
+    model = Cashier
+    template_name = 'delete_cashier.html'
+    def post(self,request,pk,*args,**kwargs):
+        object = Cashier.objects.get(id=pk)
+        object.state = False
+        object.save()
+        return redirect('view_list_cashiers')
+
+# CLIENTS
+
+class List_clients_view(ListView):
+    model = Client
+    template_name = 'list_clients.html'
+    queryset = Client.objects.filter(state=True)
+    context_object_name = 'clients'
+
+class New_Client_View(CreateView):
+    model = Client
+    form_class = ClientForm
+    template_name = 'new_client.html'
+    success_url = reverse_lazy('view_list_clients')
+
+class Update_Client_View(UpdateView):
+    model = Client
+    form_class = ClientForm
+    template_name = 'update_client.html'
+    success_url = reverse_lazy('view_list_clients')
+    
+class Delete_Client_View(DetailView):
+    model = Client
+    template_name = 'delete_client.html'
+    def post(self,request,pk,*args,**kwargs):
+        object = Client.objects.get(id=pk)
+        object.state = False
+        object.save()
+        return redirect('view_list_clients')
+
+# SALES
+
+class List_sales_view(ListView):
+    model = Sale
+    template_name = 'list_sales.html'
+    queryset = Sale.objects.all()
+    context_object_name = 'sales'
+
+class New_Sale_View(CreateView):
+    model = Sale
+    form_class = SaleForm
+    template_name = 'new_sale.html'
+    success_url = reverse_lazy('view_list_sales')
+
+class Update_Sale_View(UpdateView):
+    model = Sale
+    form_class = SaleForm
+    template_name = 'update_sale.html'
+    success_url = reverse_lazy('view_list_sales')
+    
+class Delete_Sale_View(DetailView):
+    model = Sale
+    template_name = 'delete_sale.html'
+    def post(self,request,pk,*args,**kwargs):
+        object = Sale.objects.get(id=pk)
+        # object.state = False
+        object.save()
+        return redirect('view_list_sales')
+
 # CLASS REST framework
 
 class StoreViewSet(viewsets.ModelViewSet):

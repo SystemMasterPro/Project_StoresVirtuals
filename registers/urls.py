@@ -43,6 +43,21 @@ urlpatterns = [
     path('home/list_suppliers/edit_suppliers/<int:pk>/', login_required(Update_Supplier_View.as_view()), name='view_edit_suppliers'),
     path('home/list_suppliers/delete_suppliers/<int:pk>/', login_required(Delete_Supplier_View.as_view()), name='view_delete_suppliers'),
     path('new_supplier/',login_required(New_Supplier_View.as_view()),name='view_new_supplier'),
+    # CASHIERS
+    path('home/list_cashiers/', login_required(List_cashiers_view.as_view()), name='view_list_cashiers'),
+    path('home/list_cashiers/edit_cashiers/<int:pk>/', login_required(Update_Cashier_View.as_view()), name='view_edit_cashiers'),
+    path('home/list_cashiers/delete_cashiers/<int:pk>/', login_required(Delete_Cashier_View.as_view()), name='view_delete_cashiers'),
+    path('new_cashier/',New_Cashier_View, name='view_new_cashier'),
+    # CLIENTS
+    path('home/list_clients/', login_required(List_clients_view.as_view()), name='view_list_clients'),
+    path('home/list_clients/edit_clients/<int:pk>/', login_required(Update_Client_View.as_view()), name='view_edit_clients'),
+    path('home/list_clients/delete_clients/<int:pk>/', login_required(Delete_Client_View.as_view()), name='view_delete_clients'),
+    path('new_client/',login_required(New_Client_View.as_view()),name='view_new_client'),
+    # SALES
+    path('home/list_sales/', login_required(List_sales_view.as_view()), name='view_list_sales'),
+    path('home/list_sales/edit_sales/<int:pk>/', login_required(Update_Sale_View.as_view()), name='view_edit_sales'),
+    path('home/list_sales/delete_sales/<int:pk>/', login_required(Delete_Sale_View.as_view()), name='view_delete_sales'),
+    path('new_sale/',login_required(New_Sale_View.as_view()),name='view_new_sale'),
     # API-REST
     path('api/', include(router.urls)),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),

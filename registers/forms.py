@@ -83,4 +83,38 @@ class SupplierForm(forms.ModelForm):
             'name': 'Nombre del Proveedor:',
             'phone':'Telefono del Proveedor:',
             'store': 'Tienda:'
+        }
+
+class CashierForm(forms.ModelForm):
+    class Meta:
+        model = Cashier
+        fields = ['user','phone','direction','box','image','store']
+        labels = {
+            'user': 'Nombre del Cajero:',
+            'phone':'Telefono:',
+            'direction': 'Direccion:',
+            'box':'Caja:',
+            'image':'Imagen:',
+            'store':'Tienda'
+        }
+
+class ClientForm(forms.ModelForm):
+    class Meta:
+        model = Client
+        fields = ['name','lastName','direction','phone','store']
+        labels = {
+            'name':'Nombre del Cliente:',
+            'lastName':'Apellido del Cliente:',
+            'direction':'Direccion del Cliente:',
+            'phone':'Telefono del Cliente:',
+            'store':'Tienda del Cliente:'
+        }
+
+class SaleForm(forms.ModelForm):
+    class Meta:
+        model = Sale
+        fields = ['value_final','client']
+        labels = {
+            'value_final':'Valor Total:',
+            'client':'Cliente:'
         }    

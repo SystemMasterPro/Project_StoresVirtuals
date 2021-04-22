@@ -1,0 +1,80 @@
+{% extends "index.html" %}
+{% block body %}
+
+<div>
+    <button class="btn btn-success" style="margin-bottom:4px !important;"
+        onclick="open_modal('{% url 'view_new_cashier' %}')">Nuevo Cajero</button>
+</div>
+
+{% if cashiers %}
+
+<div class="card">
+    <div class="card-header text-center" style="margin-top:4px !important;margin-bottom:4px !important;">
+        <strong class="card-title" style="font-size:40px;">CAJEROS REGISTRADOS</strong>
+    </div>
+    <div class="table order-table ov-h">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nombre</th>
+                    <th>Telefono</th>
+                    <th>Tienda</th>
+                    <th>Caja</th>
+                    <th>Imagen</th>
+                    <th>Direccion</th>
+                    <th class="text-center">Opciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for cashier in cashiers %}
+
+                <tr>
+                    <td>{{cashier.id}}</td>
+                    <td>{{cashier.user}}</td>
+                    <td>{{cashier.phone}}</td>
+                    <td>{{cashier.store}}</td>
+                    <td>{{cashier.box}}</td>
+                    <td>
+                        {{cashier.image_profile}}
+                    </td>
+                    <td>{{cashier.direction}}</td>
+                    <td class="text-center">
+                        <button class="btn btn-warning"
+                            onclick="open_modal_edition('{% url 'view_edit_cashiers' cashier.id %}')">Editar</button>
+                        <a class="btn btn-danger" href="{% url 'view_delete_cashiers' cashier.id %}">Eliminar</a>
+                    </td>
+                </tr>
+
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% else %}
+
+<h1>No existen CAJEROS registrados</h1>
+
+{% endif %}
+
+<div class="modal face" id="new-p" role="dialog">
+</div>
+<div class="modal face" id="edition-p" role="dialog">
+</div>
+
+<script type="text/javascript">
+    var $ = jQuery.noConflic();
+    function open_modal(url) {
+        $('#new-p').load(url, function () {
+            $(this).modal('show')
+        })
+    }
+    function open_modal_edition(url) {
+        $('#edition-p').load(url, function () {
+            $(this).modal('show')
+        })
+    }
+</script>
+
+{% endblock body %}
