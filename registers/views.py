@@ -282,15 +282,6 @@ class Update_Sale_View(UpdateView):
     form_class = SaleForm
     template_name = 'update_sale.html'
     success_url = reverse_lazy('view_list_sales')
-    
-class Delete_Sale_View(DetailView):
-    model = Sale
-    template_name = 'delete_sale.html'
-    def post(self,request,pk,*args,**kwargs):
-        object = Sale.objects.get(id=pk)
-        # object.state = False
-        object.save()
-        return redirect('view_list_sales')
 
 # CLASS REST framework
 

@@ -56,7 +56,6 @@ urlpatterns = [
     # SALES
     path('home/list_sales/', login_required(List_sales_view.as_view()), name='view_list_sales'),
     path('home/list_sales/edit_sales/<int:pk>/', login_required(Update_Sale_View.as_view()), name='view_edit_sales'),
-    path('home/list_sales/delete_sales/<int:pk>/', login_required(Delete_Sale_View.as_view()), name='view_delete_sales'),
     path('new_sale/',login_required(New_Sale_View.as_view()),name='view_new_sale'),
     # API-REST
     path('api/', include(router.urls)),
